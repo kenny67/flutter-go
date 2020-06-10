@@ -217,7 +217,9 @@ void main() async {
         WidgetTree.insertDevPagesToList(json, StandardPages().getLocalList()) as List;
     Application.widgetTree = WidgetTree.buildWidgetTree(data);
     print("Application.widgetTree>>>> ${Application.widgetTree}");
-  });
+  })
   db = Provider.db;
   runApp(new MyApp());
+
+  //todo startup
 }

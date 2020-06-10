@@ -33,7 +33,7 @@ class _CollectionPageState extends State<CollectionPage> {
   /// CollectionControlModel _collectionControl = new CollectionControlModel();
   List<Collection> _collectionList = [];
   ScrollController _scrollController = new ScrollController();
-  var _icons;
+  IconData  _icons;
 
   @override
   void initState() {
@@ -61,7 +61,7 @@ class _CollectionPageState extends State<CollectionPage> {
     // });
   }
 
-  Widget _renderList(context, index) {
+  Widget _renderList(BuildContext context,int index) {
     if (index == 0) {
       return Container(
         height: 40.0,

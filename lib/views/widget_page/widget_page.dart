@@ -6,6 +6,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_go/components/cate_card.dart';
+import 'package:flutter_go/model/widget.dart';
 
 import 'package:flutter_go/routers/application.dart';
 
@@ -34,7 +35,7 @@ class SecondPageState extends State<WidgetPage>
     // 存放最后的widget
     List<Widget> tiles = [];
     Application.widgetTree.children.forEach((dynamic item) {
-      tiles.add(new CateCard(category: item));
+      tiles.add(new CateCard(category: item as CategoryComponent));
     });
     return new ListView(
       children: tiles,

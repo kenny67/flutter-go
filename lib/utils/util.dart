@@ -49,7 +49,7 @@ class Util {
     return 'time error';
   }
 
-  static double setPercentage(percentage, context) {
+  static double setPercentage(num percentage, BuildContext context) {
     return MediaQuery.of(context).size.width * percentage;
   }
 

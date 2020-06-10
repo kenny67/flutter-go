@@ -130,7 +130,7 @@ class _MyAppState extends State<MyApp> {
         setState(() {
           _hasLogin = true;
           _isLoading = false;
-          _userInfo = hasLogin;
+          _userInfo = hasLogin as UserInformation;
           // 设置初始化的主题色
           // if (hasLogin.themeColor != 'default') {
           //   themeColor = int.parse(hasLogin.themeColor);
@@ -138,7 +138,7 @@ class _MyAppState extends State<MyApp> {
         });
       } else {
         setState(() {
-          _hasLogin = hasLogin;
+          _hasLogin = hasLogin as bool;
           _isLoading = false;
         });
       }
@@ -155,7 +155,7 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  showWelcomePage() {
+  Widget showWelcomePage() {
     if (_isLoading) {
       return Container(
         color: Color(this.themeColor),
@@ -214,7 +214,7 @@ void main() async {
 
   await DataUtils.getWidgetTreeList().then((List json) {
     List data =
-        WidgetTree.insertDevPagesToList(json, StandardPages().getLocalList());
+        WidgetTree.insertDevPagesToList(json, StandardPages().getLocalList()) as List;
     Application.widgetTree = WidgetTree.buildWidgetTree(data);
     print("Application.widgetTree>>>> ${Application.widgetTree}");
   });

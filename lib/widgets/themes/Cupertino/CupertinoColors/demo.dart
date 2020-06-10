@@ -19,7 +19,7 @@ class CupertinoColorsFullDefault extends StatefulWidget {
 
 // CupertinoColors 默认的实例,有状态
 class _CupertinoColorsFullDefault extends State {
-  Widget setColorsView(cupertinoColors, String colorName) {
+  Widget setColorsView(Color cupertinoColors, String colorName) {
     return Container(
         width: MediaQuery.of(context).size.width - 100,
         padding: const EdgeInsets.all(10.0),

@@ -62,7 +62,7 @@ void watch() {
 
     if (event.type == ChangeType.MODIFY) {
       if (event.path.contains('index.md')) {
-        transformMd2Dart(event.path.replaceAll('/index.md', ''));
+        transformMd2Dart(event.path.toString().replaceAll('/index.md', ''));
       }
       return ;
     }
@@ -72,8 +72,8 @@ void watch() {
 }
 bool isIgnore (List<String> ignorePath, parentPath, currentPath) {
   for (String ignore in ignorePath) {
-    String path = p.absolute(parentPath, ignore);
-    if (currentPath.contains(path)) {
+    String path = p.absolute(parentPath.toString(), ignore);
+    if (currentPath.contains(path) as bool) {
 //      print("修改的文件, 是忽略列表中的文件, 跳过编译!");
       return true;
     }

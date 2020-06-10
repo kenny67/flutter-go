@@ -15,7 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 CustomPaint graph;
-var image;
+ui.Image image;
 
 class CustomViewPage extends StatefulWidget {
   final String type;
@@ -100,7 +100,7 @@ class DrawPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    switch (type) {
+    switch (type.toString()) {
       case 'drawPoints':
         const List<Offset> points1 = [
           Offset(20.0, 0.0),

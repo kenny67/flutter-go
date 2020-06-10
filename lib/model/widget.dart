@@ -63,20 +63,20 @@ class WidgetPoint implements WidgetInterface {
       this.buildRouter});
 
   WidgetPoint.fromJSON(Map json)
-      : id = json['id'],
-        name = json['name'],
-        image = json['image'],
-        cnName = json['cnName'],
-        routerName = json['routerName'],
-        doc = json['doc'],
-        catId = json['catId'],
-        buildRouter = json['buildRouter'];
+      : id = int.parse(json['id'].toString()),
+        name = json['name'].toString(),
+        image = json['image'].toString(),
+        cnName = json['cnName'].toString(),
+        routerName = json['routerName'].toString(),
+        doc = json['doc'].toString(),
+        catId = int.parse(json['catId'].toString()),
+        buildRouter = json['buildRouter'] as WidgetBuilder;
 
   String toString() {
     return '(WidgetPoint $name)';
   }
 
-  Object toMap() {
+  Map<String, dynamic> toMap() {
     return {
       'id': id,
       'name': name,
@@ -117,7 +117,7 @@ class WidgetControlModel {
     List listJson =
         await sql.getByCondition(conditions: widgetPoint.toSqlCondition());
     List<WidgetPoint> widgets = listJson.map((json) {
-      return new WidgetPoint.fromJSON(json);
+      return new WidgetPoint.fromJSON(json as Map);
     }).toList();
     // print("widgets $widgets");
     return widgets;
@@ -129,7 +129,7 @@ class WidgetControlModel {
     if (json.isEmpty) {
       return null;
     }
-    return new WidgetPoint.fromJSON(json.first);
+    return new WidgetPoint.fromJSON(json.first as Map);
   }
 
   Future<List<WidgetPoint>> search(String name) async {
@@ -140,7 +140,7 @@ class WidgetControlModel {
     }
 
     List<WidgetPoint> widgets = json.map((json) {
-      return new WidgetPoint.fromJSON(json);
+      return new WidgetPoint.fromJSON(json as Map);
     }).toList();
 
     return widgets;
@@ -189,14 +189,14 @@ class CategoryComponent extends CommonItem {
       this.children,
       this.parent});
   CategoryComponent.fromJson(Map json) {
-    if (json['id'] != null && json['id'].runtimeType == String) {
-      this.id = int.parse(json['id']);
-    } else {
-      this.id = json['id'];
-    }
-    this.name = json['name'];
-    this.parentId = json['parentId'];
-    this.token = json['id'].toString() + json['type'];
+//    if (json['id'] != null && json['id'].runtimeType == String) {
+      this.id = int.parse(json['id'].toString());
+//    } else {
+//      this.id = json['id'];
+//    }
+    this.name = json['name'].toString();
+    this.parentId = int.parse(json['parentId'].toString());
+    this.token = json['id'].toString() + json['type'].toString();
   }
   void addChildren(Object item) {
     if (item is CategoryComponent) {
@@ -263,17 +263,18 @@ class WidgetLeaf extends CommonItem {
       this.pageId});
 
   WidgetLeaf.fromJson(Map json) {
-    if (json['id'] != null && json['id'].runtimeType == String) {
-      this.id = int.parse(json['id']);
-    } else {
-      this.id = json['id'];
-    }
-    this.name = json['name'];
-    this.display = json['display'];
-    this.author = json['author'] ?? null;
-    this.path = json['path'] ?? null;
-    this.pageId = json['pageId'] ?? null;
-    this.token = json['id'].toString() + json['type'];
+    this.id = int.parse(json['id'].toString());
+//    if (json['id'] != null && json['id'].runtimeType == String) {
+//      this.id = int.parse(json['id'].toString());
+//    } else {
+//      this.id = json['id'];
+//    }
+    this.name = json['name'].toString();
+    this.display = json['display'].toString();
+    this.author = json['author'].toString()?? null;
+    this.path = json['path'].toString() ?? null;
+    this.pageId = json['pageId'].toString()  ?? null;
+    this.token = json['id'].toString() + json['type'].toString();
   }
   @override
   CommonItem getChild(String token) {
@@ -296,22 +297,22 @@ class WidgetTree {
   static CategoryComponent buildWidgetTree(List json, [parent]) {
     CategoryComponent current;
     if (parent != null) {
-      current = parent;
+      current = parent as CategoryComponent;
     } else {
       current =
           CategoryComponent(id: 0, name: 'root', parentId: null, children: []);
     }
     json.forEach((item) {
       // 归属分类级别
-      if (['root', 'category'].indexOf(item['type']) != -1) {
-        CategoryComponent cate = CategoryComponent.fromJson(item);
+      if (['root', 'category'].indexOf(item['type'].toString()) != -1) {
+        CategoryComponent cate = CategoryComponent.fromJson(item as Map);
         if (cate.children != null) {
-          buildWidgetTree(item['children'], cate);
+          buildWidgetTree(item['children'] as List, cate);
         }
         current.addChildren(cate);
       } else {
         // 归属最后一层叶子节点
-        WidgetLeaf cate = WidgetLeaf.fromJson(item);
+        WidgetLeaf cate = WidgetLeaf.fromJson(item as Map);
         current.addChildren(cate);
       }
     });
@@ -340,7 +341,7 @@ class WidgetTree {
     });
     list.forEach((item) {
       if (item['name'].toString().toUpperCase() == 'DEVELOPER') {
-        List children = item['children'];
+        List children = item['children'] as List;
         children.insert(0, {
           "id": "99999999999",
           "name": "本地代码",
@@ -366,6 +367,6 @@ class WidgetTree {
 //      childLeaf = root.getChild(path.first);
     }
 
-    return childLeaf;
+    return childLeaf as CategoryComponent;
   }
 }

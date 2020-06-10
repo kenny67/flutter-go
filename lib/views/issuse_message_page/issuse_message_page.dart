@@ -6,6 +6,10 @@ import 'package:flutter_go/utils/data_utils.dart';
 import 'package:notus/convert.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+
+import 'package:quill_delta/quill_delta.dart';
+
+
 class IssuesMessagePage extends StatefulWidget {
   @override
   _IssuesMessagePageState createState() => _IssuesMessagePageState();
@@ -48,7 +52,7 @@ class _IssuesMessagePageState extends State<IssuesMessagePage> {
     } else {
       String mk = (_delta == null)
           ? 'No description provided.'
-          : notusMarkdown.encode(_delta);
+          : notusMarkdown.encode(_delta as Delta); // Delta x;
       DataUtils.feedback({'title': _title, "body": mk}, context).then((result) {
         _show('提交成功');
         Navigator.maybePop(context);

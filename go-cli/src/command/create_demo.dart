@@ -18,11 +18,11 @@ class DemoDetail {
   String desc;
   String id;
   DemoDetail.fromJson(Map<dynamic, dynamic> json) {
-    name = json['name'].trim();
-    author = json['author'].trim();
-    email = json['email'].trim();
-    desc = json['desc'].trim();
-    id = json['id'] ?? generateId();
+    name = json['name'].toString().trim();
+    author = json['author'].toString().trim();
+    email = json['email'].toString().trim();
+    desc = json['desc'].toString().trim();
+    id = json['id'].toString() ?? generateId();
 
 
   }

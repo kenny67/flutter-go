@@ -248,18 +248,18 @@ class _LoginPageState extends State<LoginPage> {
                 .then((value) {
               print('存储成功:$value');
               Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => AppPage(userResult)),
+                  MaterialPageRoute(builder: (context) => AppPage(userResult as UserInformation)),
                   (route) => route == null);
             });
           });
         } catch (err) {
           Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (context) => AppPage(userResult)),
+              MaterialPageRoute(builder: (context) => AppPage(userResult as UserInformation)),
               (route) => route == null);
         }
       } else if (userResult.runtimeType == String) {
         Fluttertoast.showToast(
-            msg: userResult,
+            msg: userResult.toString(),
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             timeInSecForIos: 1,

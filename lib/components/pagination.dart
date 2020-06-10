@@ -69,7 +69,7 @@ class Pagination extends StatelessWidget {
 
     /// super.initState();
     arr.forEach((item) {
-      bannerStories.add(StoryModel.fromJson(item));
+      bannerStories.add(StoryModel.fromJson(item as Map<String, dynamic>));
     });
 
     if (arr.length > 0) {

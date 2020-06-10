@@ -155,7 +155,7 @@ class _MaterialSearchState<T> extends State<MaterialSearch> {
       if (results != null) {
         setState(() {
           _loading = false;
-          _results = results;
+          _results = results as List<MaterialSearchResult<T>>;
         });
       }
     });
@@ -178,7 +178,7 @@ class _MaterialSearchState<T> extends State<MaterialSearch> {
     }
     if (results.isNotEmpty) {
       var content =
-          new SingleChildScrollView(child: new Column(children: results));
+          new SingleChildScrollView(child: new Column(children: results as List<Widget>));
       return content;
     }
     return Center(child: Text("暂无数据"));
@@ -194,7 +194,7 @@ class _MaterialSearchState<T> extends State<MaterialSearch> {
       //only apply default filter if used the `results` option
       //because getResults may already have applied some filter if `filter` option was omited.
       else if (widget.results != null) {
-        return _filter(result.value, _criteria);
+        return _filter(result.value, _criteria) as bool;
       }
 
       return true;
@@ -247,7 +247,7 @@ class _MaterialSearchPageRoute<T> extends MaterialPageRoute<T> {
   _MaterialSearchPageRoute({
     @required WidgetBuilder builder,
     RouteSettings settings: const RouteSettings(),
-    maintainState: true,
+    bool maintainState: true,
     bool fullscreenDialog: false,
   })  : assert(builder != null),
         super(
@@ -297,7 +297,7 @@ class _MaterialSearchInputState<T> extends State<MaterialSearchInput<T>> {
     return new _MaterialSearchPageRoute<T>(
         settings: new RouteSettings(
           name: 'material_search',
-          isInitialRoute: false,
+         // isInitialRoute: false,   //todo
         ),
         builder: (BuildContext context) {
           return new Material(
@@ -315,11 +315,11 @@ class _MaterialSearchInputState<T> extends State<MaterialSearchInput<T>> {
 
   _showMaterialSearch(BuildContext context) {
     Navigator.of(context)
-        .push(_buildMaterialSearchPage(context))
+        .push(_buildMaterialSearchPage(context) as Route<Object>)
         .then((dynamic value) {
       if (value != null) {
-        _formFieldKey.currentState.didChange(value);
-        widget.onSelect(value);
+        _formFieldKey.currentState.didChange(value as T);
+        widget.onSelect(value as T);
       }
     });
   }
@@ -393,7 +393,7 @@ class SearchInput extends StatelessWidget {
           new Expanded(
             child: new MaterialSearchInput(
               placeholder: '搜索 flutter 组件',
-              getResults: getResults,
+              getResults: getResults as MaterialResultsFinder,
             ),
           ),
         ],
@@ -440,7 +440,7 @@ class _History extends State<History> {
         ),
       );
       if (WidgetName2Icon.icons[value.name] != null) {
-        icon = Icon(WidgetName2Icon.icons[value.name], size: 25);
+        icon = Icon(WidgetName2Icon.icons[value.name] as IconData, size: 25);
       }
       String targetRouter = value.targetRouter;
 
@@ -468,7 +468,7 @@ class _History extends State<History> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> childList = buildChips(context);
+    List<Widget> childList = buildChips(context) as List<Widget>;
     if (childList.length == 0) {
       return Center(
         child: Text("当前历史面板为空"),

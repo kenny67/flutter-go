@@ -53,7 +53,7 @@ class CustomViewPageState extends State<CustomViewPage>
 ///新建类继承于CustomPainter并且实现CustomPainter里面的paint（）和shouldRepaint方法
 class DrawPainter extends CustomPainter {
   Paint painter;
-  final type;
+  final String type;
 
   DrawPainter({this.type}) {
     //    Paint painter = Paint()

@@ -18,7 +18,7 @@ class CupertinoAppFullDefault extends StatefulWidget {
 
 // CupertinoApp 默认的实例,有状态
 class _CupertinoAppFullDefault extends State {
-  routerHandler(setting) {
+  Route routerHandler(setting) {
     //setting.isInitialRoute; bool类型 是否初始路由
     //setting.name; 要跳转的路由名key
     return PageRouteBuilder(

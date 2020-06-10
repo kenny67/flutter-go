@@ -16,6 +16,8 @@ class InvalidDemo implements Exception {
 
   @override
   String toString() {
-    return format('{color.red}Invalid demo happends:  $details {color.normal}');
+    //return format('{color.red}Invalid demo happends:  $details {color.normal}');
+    //todo
+    return "{color.red}Invalid demo happends:" + details;
   }
 }

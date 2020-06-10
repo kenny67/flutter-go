@@ -29,7 +29,7 @@ class _CollectionFullPageState extends State<CollectionFullPage> {
   /// CollectionControlModel _collectionControl = new CollectionControlModel();
   List<Collection> _collectionList = [];
   ScrollController _scrollController = new ScrollController();
-  var _icons;
+  IconData _icons;
 
   @override
   void initState() {
@@ -45,7 +45,7 @@ class _CollectionFullPageState extends State<CollectionFullPage> {
     DataUtils.getAllCollections(context).then((collectionList) {
       if (this.mounted) {
         setState(() {
-          _collectionList = collectionList;
+          _collectionList = collectionList as List<Collection>;
         });
       }
     });
@@ -57,7 +57,7 @@ class _CollectionFullPageState extends State<CollectionFullPage> {
     super.dispose();
   }
 
-  Widget _renderList(context, index) {
+  Widget _renderList(BuildContext context, int index) {
     if (index == 0) {
       return Container(
         height: 40.0,

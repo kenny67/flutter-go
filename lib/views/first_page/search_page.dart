@@ -19,10 +19,10 @@ final _industryPage = Industry.IndustryPage(itemTitle: (state) {
           size: 32,
         ),
         title: Text(
-          state.res[index].title,
+          state.res[index].title.toString(),
           overflow: TextOverflow.ellipsis,
         ),
-        subtitle: Text(state.res[index].source),
+        subtitle: Text(state.res[index].source.toString()),
         onTap: () {
           // 在这里对选中的结果进行解析
           print(state.res[index].source);
@@ -30,13 +30,13 @@ final _industryPage = Industry.IndustryPage(itemTitle: (state) {
           final itemUrl = state.res[index].source;
           Application.router.navigateTo(
             context,
-            '${Routes.webViewPage}?title=${Uri.encodeComponent(itemTitle)}&url=${Uri.encodeComponent(itemUrl)}',
+            '${Routes.webViewPage}?title=${Uri.encodeComponent(itemTitle.toString())}&url=${Uri.encodeComponent(itemUrl.toString())}',
             transition: TransitionType.nativeModal,
           );
         },
       );
     },
-    itemCount: state.res.length,
+    itemCount: int.parse(state.res.length.toString()),
   );
 });
 

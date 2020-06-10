@@ -14,7 +14,7 @@ import 'package:flutter_go/event/event_bus.dart';
 import 'package:flutter_go/event/event_model.dart';
 import 'package:event_bus/event_bus.dart';
 
-const List<Map<String, dynamic>> defalutThemeColor = [
+const List<Map<String, dynamic>> defaultThemeColor = [
   {'cnName': 'Flutter篮', 'value': 0xFF3391EA},
   {'cnName': '拍卖红', 'value': 0xFFC91B3A},
   {'cnName': '阿里橙', 'value': 0xFFF7852A},
@@ -116,10 +116,10 @@ class _DrawerPageState extends State<DrawerPage> {
 
   List<Widget> buildThemeColorChildren() {
     List<Widget> tempWidget = [];
-    for (var i = 0; i < defalutThemeColor.length; i++) {
+    for (var i = 0; i < defaultThemeColor.length; i++) {
       tempWidget.add(SingleThemeColor(
-        themeColor: defalutThemeColor[i]['value'],
-        coloeName: defalutThemeColor[i]['cnName'],
+        themeColor: int.parse(defaultThemeColor[i]['value'].toString()),
+        coloeName: defaultThemeColor[i]['cnName'].toString(),
       ));
     }
     return tempWidget;

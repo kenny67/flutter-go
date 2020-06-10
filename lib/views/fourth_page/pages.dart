@@ -31,14 +31,14 @@ final pages = [
 ];
 SpUtil sp;
 
-class Page extends StatelessWidget {
+class MyPage extends StatelessWidget {
   final PageViewModel viewModel;
   final double percentVisible;
-  Page({
+  MyPage({
     this.viewModel,
     this.percentVisible = 1.0,
   });
-  _goHomePage(context) {
+  _goHomePage(BuildContext context) {
     Navigator.of(context)
         .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
   }

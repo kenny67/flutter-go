@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_go/views/fourth_page/pager_indicator.dart';
 
 class PageDragger extends StatefulWidget {
-  final canDragLeftToRight;
-  final canDragRightToLeft;
+  final bool canDragLeftToRight;
+  final bool canDragRightToLeft;
 
   final StreamController<SlideUpdate> slideUpdateStream;
 
@@ -46,7 +46,7 @@ class _PageDraggerState extends State<PageDragger> {
       }
 
       if (slideDirection != SlideDirection.none) {
-        slidePercent = (dx / FULL_TRANSTITION_PX).abs().clamp(0.0, 1.0);
+        slidePercent = ( dx / FULL_TRANSTITION_PX).abs().clamp(0.0, 1.0).toDouble();
       } else {
         slidePercent = 0.0;
       }
@@ -78,7 +78,7 @@ class _PageDraggerState extends State<PageDragger> {
 class AnimatedPageDragger {
   static const PERCENT_PER_MILLISECOND = 0.005;
 
-  final slideDirection;
+  final SlideDirection slideDirection;
   final transitionGoal;
 
   AnimationController completionAnimationController;
@@ -86,13 +86,14 @@ class AnimatedPageDragger {
   AnimatedPageDragger({
     this.slideDirection,
     this.transitionGoal,
-    slidePercent,
+    double slidePercent,
     StreamController<SlideUpdate> slideUpdateStream,
     TickerProvider vsync,
   }) {
     final startSlidePercent = slidePercent;
-    var endSlidePercent;
-    var duration;
+    double endSlidePercent;
+
+    Duration duration;
 
     if (transitionGoal == TransitionGoal.open) {
       endSlidePercent = 1.0;
@@ -153,8 +154,8 @@ enum UpdateType {
 
 class SlideUpdate {
   final updateType;
-  final direction;
-  final slidePercent;
+  final SlideDirection direction;
+  final double slidePercent;
 
   SlideUpdate(this.updateType, this.direction, this.slidePercent);
 }

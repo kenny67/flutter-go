@@ -215,8 +215,10 @@ class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
         return false;
       case TargetPlatform.iOS:
         return actions == null || actions.length < 2;
+      default:
+        return null;
     }
-    return null;
+    //return null;
   }
 
   @override
@@ -298,6 +300,8 @@ class _MyAppBarState extends State<MyAppBar> {
           namesRoute = true;
           break;
         case TargetPlatform.iOS:
+          break;
+        default: //windows macos ...
           break;
       }
       title = DefaultTextStyle(

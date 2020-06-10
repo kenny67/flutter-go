@@ -22,13 +22,13 @@ void _launchURL(String url) async {
   }
 }
 
-Future<String> getExampleCode(
+Future<String> getExampleCode(BuildContext
     context, String filePath, AssetBundle bundle) async {
   if (_exampleCode == null) await _parseExampleCode(context, filePath, bundle);
   return _code;
 }
 
-Future<void> _parseExampleCode(
+Future<void> _parseExampleCode(BuildContext
     context, String filePath, AssetBundle bundle) async {
   String code;
   try {

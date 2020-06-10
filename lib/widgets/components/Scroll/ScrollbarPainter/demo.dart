@@ -93,6 +93,9 @@ class _ScrollbarPainterDemoState extends State<ScrollbarPainterDemo>
         _textDirection = Directionality.of(context);
         _materialPainter = _buildMaterialScrollbarPainter();
         break;
+      default:
+
+        break;
     }
   }
 
@@ -154,6 +157,10 @@ class _ScrollbarPainterDemoState extends State<ScrollbarPainterDemo>
             ),
           ),
         );
+
+      default:
+
+        break;
     }
     throw FlutterError('Unknown platform for scrollbar insertion');
   }

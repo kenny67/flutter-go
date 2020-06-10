@@ -8,14 +8,14 @@ class StoryModel {
 
   StoryModel.fromJson(Map<String, dynamic> json)
       : this(
-          json['id'],
-          json['title'],
-          image: json['image'] != null
-              ? json['image']
-              : (json['images'] != null ? json['images'][0] : null),
-          url: json['url'] != null
-              ? json['url']
-              : (json['url'] != null ? json['url'][0] : null),
+    int.parse(json['id'].toString()),
+          json['title'].toString(),
+          image: json['image'].toString() != null
+              ? json['image'].toString()
+              : (json['images'].toString() != null ? json['images'][0].toString(): null),
+          url: json['url'].toString() != null
+              ? json['url'].toString()
+              : (json['url'].toString() != null ? json['url'][0].toString(): null),
         );
 
   Map<String, dynamic> toJson() {

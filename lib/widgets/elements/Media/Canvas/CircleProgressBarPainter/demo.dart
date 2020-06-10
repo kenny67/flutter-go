@@ -71,7 +71,7 @@ class CircleProgressBarPainter extends CustomPainter {
   Paint _paintBackground;
   Paint _paintFore;
   final double pi = 3.1415926;
-  var jindu;
+  double jindu;
 
   CircleProgressBarPainter(this.jindu) {
     _paintBackground = Paint()
